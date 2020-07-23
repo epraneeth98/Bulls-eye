@@ -14,20 +14,28 @@ struct ContentView: View {
     @State var target: Int = (Int.random(in: 1...10000)%100)
     @State var totalScore: Int = 0
     @State var round: Int = 1
+    
+    struct LabelStyle: ViewModifier{
+        func body(content: Content) -> some View{
+            return content
+            .foregroundColor(Color.white)
+            .shadow(color: Color.black, radius: 5, x: 2, y: 2)
+        }
+    }
     var body: some View {
         VStack {
             Spacer()
             //target row
             HStack {
-                Text("Put the bulls eye as close as possible to:")
+                Text("Put the bulls eye as close as possible to:").modifier(LabelStyle())
                 Text("\(target)")
             }
             Spacer()
             //slider row
             HStack{
-                Text("1")
+                Text("1").modifier(LabelStyle())
                 Slider(value: $sliderValue, in: 1...100)
-                Text("100")
+                Text("100").modifier(LabelStyle())
             }
             Spacer()
             //button row
@@ -36,7 +44,7 @@ struct ContentView: View {
                 self.alertIsVisible = true
                 self.totalScore += self.pointsScored()
             }) {
-                Text(/*@START_MENU_TOKEN@*/"Hit me!"/*@END_MENU_TOKEN@*/)
+                Text("Hit me!")
             }
             
             .alert(isPresented: $alertIsVisible){ () ->
@@ -75,6 +83,7 @@ struct ContentView: View {
             .padding(.bottom, 30)
             
         }
+    .background(Image("Background"))
     }
     func pointsScored() -> Int{
         let points: Int = 100 - abs(Int(sliderValue) - target)
