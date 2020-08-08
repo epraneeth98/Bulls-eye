@@ -1,2 +1,2 @@
 # Bulls-eye
-A iOS as a part of the course.
+A sample iOS app as a part of the course.
